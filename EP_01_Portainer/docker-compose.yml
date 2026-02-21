@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  rt-portainer:
+    container_name: rt-portainer
+    image: portainer/portainer-ce:2.19.4
+    restart: unless-stopped
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - rt-portainer-data:/data
+    networks:
+      - rt-network
+
+volumes:
+  rt-portainer-data:
+    name: rt-portainer-data
+
+networks:
+  rt-network:
+    name: rt-network
+    driver: bridge
